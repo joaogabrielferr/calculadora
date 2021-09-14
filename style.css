@@ -1,0 +1,69 @@
+body{
+    background-color: #383838;
+    margin: 0;
+}
+
+#out{
+   /* background-color: blue;*/
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+#Main{
+/*     background-color: red;
+ */   height: 300px;
+   width: 40%;
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+   grid-gap: 5px;
+
+}
+
+#tela{
+/*     background-color: #f1f1f1;
+ */   width: 100%;
+    grid-column: 1 / 5;
+}
+
+#tela input{
+
+    padding:20px 20px;
+    width: 92%;
+    margin: auto;
+    display: block;
+    border: 2px solid grey;
+    border-radius: 5px;
+    font-family: 'Heebo';
+    font-size: 40px;
+    text-align: right;
+
+}
+
+button{
+    background-color: #dedede;
+    border: none;
+    padding: 15px 32px;
+    font-size: 16px;
+    border-radius: 3px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: 'Heebo';
+}
+
+button:hover{
+    background-color: #b8b8b8;
+}
+
+button:active{
+    transform: translateY(4px);
+}
+#op{
+    background-color: #b5b5b5;
+}
+
+#R{
+    background-color: #6393cf;
+}
