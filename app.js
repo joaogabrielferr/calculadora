@@ -43,46 +43,52 @@ for(i = 0;i<opbts.length;i++)
     opbts[i].addEventListener("click",addop);
 }
 
-const converte = function(arrnum)
+//converte string para numero
+const converte = function(strnum)
 {
+    //for(const el of strnum)console.log(el);
     let r = 0;
-    let pow = 0;
-    console.log(arrnum);
+    let pow = strnum.length - 1;
+    for(const el of strnum)
+    {
+        let n = el.charCodeAt(0) - 48;
+        r+= (n * (10**pow));
+        pow--;
+    }
+    return r;
 }
 
+//calcula a equação
 let calcula = function(){
 
     arraystr.push(currstr);
     currstr = "";
-    console.log(arraystr);
     let multi = 0,div = 0,soma = 0,sub = 0;
-    for(i = 0;i<arraystr.length;i++)
+    let resultado = 0;
+    for(const el of arraystr)
     {
-        if(arraystr[i] == "x")multi++;
-        if(arraystr[i] == "÷")multi++;
-        if(arraystr[i] == "+")multi++;
-        if(arraystr[i] == "-")multi++;
-    }  
-        while(arraystr.length > 1)
-        {
-        while(multi > 0)
-        {
-            //multiplicação primeiro
-            for(i = 0;i<arraystr.length;i++)
-            {
-                if(arraystr[i] == "x")
-                {
-                    console.log("achou x na pos " + i);
-                    converte(arraystr[i-1]);
-                    converte(arraystr[i+1]);
-                    break;
-                }
-            }
-            multi--;
-        }
-            arraystr.length = 1;
-        }
+        if(el == "x")multi++;
+        if(el == "÷")div++;
+        if(el == "+")soma++;
+        if(el == "-")sub++;
     }
+
+    while(multi > 0)
+    {
+        for(i = 0;i<arraystr.length;i++)
+        {
+            if(arraystr[i] == "x")
+            {
+                converte(arraystr[i-1]);
+                converte(arraystr[i+1]);
+                break;
+            }
+        }
+
+        multi--;
+    }
+
+}
 
 
 
