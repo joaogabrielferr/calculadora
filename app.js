@@ -73,21 +73,30 @@ let calcula = function(){
         if(el == "-")sub++;
     }
 
+    while(arraystr.length > 1){
     while(multi > 0)
     {
         for(i = 0;i<arraystr.length;i++)
         {
             if(arraystr[i] == "x")
             {
-                converte(arraystr[i-1]);
-                converte(arraystr[i+1]);
+                let n1 = converte(arraystr[i-1]);
+                let n2 = converte(arraystr[i+1]);
+                let resultado = n1*n2;
+                let resultstring = resultado.toString();
+                arraystr.splice(i+2,0,resultstring);
+                console.log(arraystr);
+                
                 break;
             }
         }
 
         multi--;
     }
-
+    arraystr.length = 1;
+    }
+    console.log(arraystr);
+    
 }
 
 
