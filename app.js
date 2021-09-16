@@ -2,6 +2,7 @@ let telastr = "";
 let currstr = "";
 const arraystr = [];
 
+let calculado = false;
 
 //coloca os numeros na tela
 let numeros = document.getElementsByClassName("botao");
@@ -86,17 +87,19 @@ let calcula = function(){
                 let resultstring = resultado.toString();
                 arraystr.splice(i+2,0,resultstring);
                 console.log(arraystr);
-                
+                arraystr.splice(i-1,3);                
                 break;
             }
         }
 
         multi--;
     }
-    arraystr.length = 1;
     }
     console.log(arraystr);
-    
+    document.getElementById("ans").innerHTML = arraystr[0];
+    document.getElementById("inputID").value = arraystr[0];
+    arraystr.length = 0;
+    calculado = true; 
 }
 
 

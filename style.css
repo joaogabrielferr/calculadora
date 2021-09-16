@@ -68,7 +68,7 @@ button:hover{
 button:active{
     transform: translateY(4px);
 }
-#op{
+.op{
     background-color: #b5b5b5;
 }
 
