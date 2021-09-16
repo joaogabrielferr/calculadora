@@ -25,7 +25,28 @@ ac.addEventListener("click",()=>{
     telastr = "";
     document.getElementById("inputID").value = "0";
     arraystr.length = 0;
-})
+    document.getElementById("ans").innerHTML = "Ans";
+});
+
+let ans = document.getElementById("ans").addEventListener("click",()=>{
+    if(currstr=="" && !calculado)
+    {
+        currstr = document.getElementById("ans").innerHTML;
+        telastr+=currstr;
+        calculado = false;
+    }
+});
+
+//todo: ta add o ! msm sem numero no inicio
+let opfac = document.getElementById("opfac").addEventListener("click",()=>{
+    if(currstr!=""){
+    currstr+="!";
+    telastr+="!";
+    arraystr.push(currstr);
+    document.getElementById("inputID").value = telastr;
+    }
+});
+
 
 let addop = function(){
     if(currstr != ""){
@@ -59,12 +80,13 @@ const converte = function(strnum)
     return r;
 }
 
+
 //calcula a equação
 let calcula = function(){
 
     arraystr.push(currstr);
     currstr = "";
-    let multi = 0,div = 0,soma = 0,sub = 0;
+    let multi = 0,div = 0,soma = 0,sub = 0,fac = 0;
     let resultado = 0;
     for(const el of arraystr)
     {
@@ -72,9 +94,34 @@ let calcula = function(){
         if(el == "÷")div++;
         if(el == "+")soma++;
         if(el == "-")sub++;
+        if(el[el.length - 1] == '!')fac++;
     }
 
     while(arraystr.length > 1){
+    
+    while(fac > 0)
+    {
+        for(i = 0;i<arraystr.length;i++)
+        {
+            let aux = arraystr[i];
+            if(aux[aux.length - 1] == '!')
+            {
+                let numstr = aux.replace("!","");
+                let num = parseInt(numstr,10);
+                let resultado = 1;
+                for(i = 2;i<=num;i++)
+                {
+                    resultado*=i;
+                }
+                let resultstring = resultado.toString();
+                arraystr[i] = resultstring;
+                fac--;
+                break;
+
+            }
+        }
+    }
+
     while(multi > 0)
     {
         for(i = 0;i<arraystr.length;i++)
@@ -87,17 +134,18 @@ let calcula = function(){
                 let resultstring = resultado.toString();
                 arraystr.splice(i+2,0,resultstring);
                 console.log(arraystr);
-                arraystr.splice(i-1,3);                
+                arraystr.splice(i-1,3);
+                multi--;                
                 break;
             }
         }
-
-        multi--;
     }
     }
     console.log(arraystr);
     document.getElementById("ans").innerHTML = arraystr[0];
     document.getElementById("inputID").value = arraystr[0];
+    currstr = arraystr[0];
+    telastr = currstr; 
     arraystr.length = 0;
     calculado = true; 
 }
