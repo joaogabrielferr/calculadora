@@ -15,7 +15,6 @@ let addnumero = function()
     atual+=this.innerHTML;
     tela+=this.innerHTML;
     atualizatela();
-    
 }
 let numeros = document.getElementsByClassName("numero");
 for(i = 0;i<numeros.length;i++)
@@ -24,13 +23,12 @@ for(i = 0;i<numeros.length;i++)
 }
 
 //adiciona operação
-
 let addop = function()
 {
     if(atual[atual.length - 1] >= '0' && atual[atual.length - 1] <= '9')
     {
-    atual+=this.innerHTML;
-    tela+= (" " + this.innerHTML + " ");
+    atual+= (" " + this.innerHTML + " ");
+    tela = atual;
     }
     atualizatela();
 }
@@ -39,6 +37,26 @@ for(i = 0;i<ops.length;i++)
 {
     ops[i].addEventListener("click",addop)
 }
+
+let AC = document.getElementById("opAC").addEventListener("click",
+()=>{
+    atual = "";
+    document.getElementById("inputID").value = "0";
+    tela = "";
+})
+
+let EC = document.getElementById("opEC").addEventListener("click",
+()=>{
+    if(atual[atual.length-1] == ' ')
+    {
+        atual = atual.slice(0,-3);
+    }else
+    {
+        atual = atual.slice(0,-1);
+    }
+    tela = atual; 
+    atualizatela();
+})
 
 
 //https://www.geeksforgeeks.org/how-to-place-cursor-position-at-end-of-text-in-text-input-field-using-javascript/
