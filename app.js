@@ -62,8 +62,8 @@ let EC = document.getElementById("opEC").addEventListener("click",
 let converte = function(num)
 {
     let r = 0;
-    let pow = strnum.length - 1;
-    for(const el of strnum)
+    let pow = num.length - 1;
+    for(const el of num)
     {
         let n = el.charCodeAt(0) - 48;
         r+= (n * (10**pow));
@@ -73,9 +73,30 @@ let converte = function(num)
 }
 
 //todo funcao de operacao
-let operacao = function(op,arr)
+let operacao = function(op,arr,qtd)
 {
-
+    while(qtd > 0)
+    {
+        for(i = 0;i<arr.length;i++)
+        {
+            if(arr[i] == op)
+            {
+                let n1 = converte(arr[i-1]);
+                let n2 = converte(arr[i+1]);
+                let resultado = 0;
+                if(op == "x")resultado = n1*n2;
+                if(op == "÷")resultado = n1/n2;
+                if(op == "+")resultado = n1 + n2;
+                if(op == "-")resultado = n1 - n2;
+                resultado = resultado.toString();
+                arr.splice(i+2,0,resultado);
+                arr.splice(i-1,3);
+                break;
+            }
+        }
+        qtd--;      
+    }
+    return arr;
 
 }
 
@@ -116,25 +137,15 @@ let calcula = function()
     console.log("multi:" + multi);
     while(arr.length > 1)
     {
-        while(multi > 0)
-        {
-            for(i = 0;i<arr.length;i++)
-            {
-                if(arr[i] == "x")
-                {
-                    let n1 = arr[i-1];
-                    let n2 = arr[i+1];
-                    let resultado = n1*n2;
-                    resultado = resultado.toString();
-                    arr.splice(i+2,0,resultado);
-                    arr.splice(i-1,3);
-                    break;
-                }
-            }
-            multi--;
-        }
-        
+        arr = operacao("x",arr,multi);
+        arr = operacao("÷",arr,div);
+        arr = operacao("+",arr,soma);
+        arr = operacao("-",arr,sub);
+        console.log(arr);
     }
+    tela = arr[0].toString();
+    atual = tela;
+    atualizatela();
 
 
     }
