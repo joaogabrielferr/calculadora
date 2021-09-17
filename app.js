@@ -59,6 +59,91 @@ let EC = document.getElementById("opEC").addEventListener("click",
 })
 
 
+let converte = function(num)
+{
+    let r = 0;
+    let pow = strnum.length - 1;
+    for(const el of strnum)
+    {
+        let n = el.charCodeAt(0) - 48;
+        r+= (n * (10**pow));
+        pow--;
+    }
+    return r;
+}
+
+//todo funcao de operacao
+let operacao = function(op,arr)
+{
+
+
+}
+
+let calcula = function()
+{
+    if(atual[atual.length - 1] != ' ')
+    {
+    let arr = [];
+    let aux = "";
+    let i = 0;
+    while(i < atual.length)
+    {
+        if(atual[i] >= '0' && atual[i] <= '9')
+        {
+            aux+=atual[i];
+        }else
+        {
+            arr.push(aux);
+            i++;
+            aux = atual[i];
+            arr.push(aux);
+            i++;
+            aux = "";
+        }
+        i++;
+    }
+    arr.push(aux);
+    
+    let multi = 0,div = 0,soma = 0,sub = 0;
+    for(el of arr)
+    {
+        if(el == "x")multi++;
+        if(el == "÷")div++;
+        if(el == "+")soma++;
+        if(el == "-")sub++;
+    }
+    console.log(arr);
+    console.log("multi:" + multi);
+    while(arr.length > 1)
+    {
+        while(multi > 0)
+        {
+            for(i = 0;i<arr.length;i++)
+            {
+                if(arr[i] == "x")
+                {
+                    let n1 = arr[i-1];
+                    let n2 = arr[i+1];
+                    let resultado = n1*n2;
+                    resultado = resultado.toString();
+                    arr.splice(i+2,0,resultado);
+                    arr.splice(i-1,3);
+                    break;
+                }
+            }
+            multi--;
+        }
+        
+    }
+
+
+    }
+}
+
+let R = document.getElementById("R").addEventListener("click",calcula);
+
+
+
 //https://www.geeksforgeeks.org/how-to-place-cursor-position-at-end-of-text-in-text-input-field-using-javascript/
 let cursor = function PosEnd(end) {
     var len = end.value.length;
