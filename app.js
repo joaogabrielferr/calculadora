@@ -77,6 +77,11 @@ let converte = function(num)
     return r;
 }
 
+function converteponto(num)
+{
+    
+}
+
 let operacao = function(op,arr,qtd)
 {
     while(qtd > 0)
@@ -86,8 +91,13 @@ let operacao = function(op,arr,qtd)
             if(arr[i] == op)
             {
                 let n1,n2;
-                n1 = converte(arr[i-1]);
-                n2 = converte(arr[i+1]);
+                let ponto1 = false,ponto2 = false;
+                for(el of arr[i-1])if(el == '.')ponto1 = true;
+                for(el of arr[i+1])if(el == '.')ponto2 = true;
+                if(ponto1)n1 = converteponto(arr[i-1])
+                else n1 = converte(arr[i-1]);
+                if(ponto2)n2 = converteponto(arr[i+1]);
+                else n2 = converte(arr[i+1]);
                 let resultado = 0;
                 if(op == "x")resultado = n1*n2;
                 if(op == "÷")resultado = n1/n2;
