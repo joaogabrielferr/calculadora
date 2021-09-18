@@ -1,6 +1,7 @@
 tela = "";
 atual = "";
 
+let erro = false;
 
 let atualizatela = function()
 {
@@ -43,16 +44,20 @@ let AC = document.getElementById("opAC").addEventListener("click",
     atual = "";
     document.getElementById("inputID").value = "0";
     tela = "";
+    document.getElementById("ans").innerHTML = "Ans";
 })
 
 let EC = document.getElementById("opEC").addEventListener("click",
 ()=>{
+    console.log(atual);
+    if(atual != ""){
     if(atual[atual.length-1] == ' ')
     {
         atual = atual.slice(0,-3);
     }else
     {
         atual = atual.slice(0,-1);
+    }
     }
     tela = atual; 
     atualizatela();
@@ -72,7 +77,6 @@ let converte = function(num)
     return r;
 }
 
-//todo funcao de operacao
 let operacao = function(op,arr,qtd)
 {
     while(qtd > 0)
@@ -81,8 +85,9 @@ let operacao = function(op,arr,qtd)
         {
             if(arr[i] == op)
             {
-                let n1 = converte(arr[i-1]);
-                let n2 = converte(arr[i+1]);
+                let n1,n2;
+                n1 = converte(arr[i-1]);
+                n2 = converte(arr[i+1]);
                 let resultado = 0;
                 if(op == "x")resultado = n1*n2;
                 if(op == "÷")resultado = n1/n2;
@@ -109,7 +114,7 @@ let calcula = function()
     let i = 0;
     while(i < atual.length)
     {
-        if(atual[i] >= '0' && atual[i] <= '9')
+        if((atual[i] >= '0' && atual[i] <= '9') || atual[i] == '.')
         {
             aux+=atual[i];
         }else
@@ -146,14 +151,45 @@ let calcula = function()
     tela = arr[0].toString();
     atual = tela;
     atualizatela();
+    document.getElementById("ans").innerHTML = arr[0];
 
 
     }
 }
 
+let ans = document.getElementById("ans").addEventListener("click",
+()=>{
+    if(document.getElementById("ans").value != "Ans")
+    {
+        atual+= document.getElementById("ans").innerHTML;
+        tela = atual;
+        atualizatela();
+    }
+});
+
 let R = document.getElementById("R").addEventListener("click",calcula);
 
+function addponto()
+{
+    if(atual[atual.length - 1] == ' ' || atual.length == 0)return;
+    let ponto = 0;
+    let i = atual.length - 1;
+    while(atual[i] != ' ' && i > 0)
+    {
+        if(atual[i] == '.')
+        {
+            ponto = 1;
+            break;
+        }
+        i--;
+    }
+    if(ponto >= 1)return;
+    atual+=this.innerHTML;
+    tela+=this.innerHTML;
+    atualizatela();
+}
 
+document.getElementById("ponto").addEventListener("click",addponto);
 
 //https://www.geeksforgeeks.org/how-to-place-cursor-position-at-end-of-text-in-text-input-field-using-javascript/
 let cursor = function PosEnd(end) {

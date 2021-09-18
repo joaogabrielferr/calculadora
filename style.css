@@ -13,7 +13,7 @@ body{
 }
 
 #Main{
-background-color: red;
+background-color: rgb(32, 32, 32);
    height: 350px;
    width: 500px;
    display: grid;
