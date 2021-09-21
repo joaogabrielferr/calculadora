@@ -79,7 +79,31 @@ let converte = function(num)
 
 function converteponto(num)
 {
-    
+    let antes = "";
+    let depois = "";
+    let a = true;
+    let d = false;
+    for(el of num)
+    {
+        if(el != '.' && a && !d)antes+=el;
+        if(el != '.' && !a && d)depois+=el;
+        if(el == '.')
+        {
+            a = false;
+            d = true;
+        }
+    }
+
+    let divisor = "1";
+    for(el of depois)divisor+='0'
+
+    let n1 = converte(antes);
+    let n2 = converte(depois);
+    let divnum = converte(divisor);
+    console.log(n1 + " " + n2 + " " + divnum);
+    return (n1 + (n2/divnum));
+
+
 }
 
 let operacao = function(op,arr,qtd)
